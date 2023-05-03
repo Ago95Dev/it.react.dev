@@ -1,27 +1,27 @@
 ---
-title: Render and Commit
+title: Renderizzare e Aggiornare
 ---
 
 <Intro>
 
-Before your components are displayed on screen, they must be rendered by React. Understanding the steps in this process will help you think about how your code executes and explain its behavior.
+Prima che i tuoi componenti siano visualizzati sullo schermo, devono essere renderizzati da React. Comprendere i passaggi di questo processo ti aiuterà a pensare a come il tuo codice viene eseguito e a spiegare il suo comportamento
 
 </Intro>
 
 <YouWillLearn>
 
-* What rendering means in React
-* When and why React renders a component
-* The steps involved in displaying a component on screen
-* Why rendering does not always produce a DOM update
+* Cosa significa rendering in React
+* Quando e perché React renderizza un componente
+* I passaggi coinvoltinecessari per visualizzare un componente sullo schermo
+* Perché il rendering non sempre produce un aggiornamento del DOM
 
 </YouWillLearn>
 
-Imagine that your components are cooks in the kitchen, assembling tasty dishes from ingredients. In this scenario, React is the waiter who puts in requests from customers and brings them their orders. This process of requesting and serving UI has three steps:
+Immagina che i tuoi componenti siano chef in cucina, che assemblano piatti gustosi dagli ingredienti. In questo scenario, React è il cameriere che prende le richieste dai clienti e porta loro gli ordini. Questo processo di richiesta e servizio dell'interfaccia utente (UI) ha tre fasi:
 
-1. **Triggering** a render (delivering the guest's order to the kitchen)
-2. **Rendering** the component (preparing the order in the kitchen)
-3. **Committing** to the DOM (placing the order on the table)
+1. **Avviare** una renderizzazione (consegnare l'ordine del cliente alla cucina)
+2. **Renderizzare** il componente (preparare l'ordine in cucina)
+3. **Aggiornare** il DOM (mettere l'ordine sul tavolo)
 
 <IllustrationBlock sequential>
   <Illustration caption="Trigger" alt="React as a server in a restaurant, fetching orders from the users and delivering them to the Component Kitchen." src="/images/docs/illustrations/i_render-and-commit1.png" />
@@ -29,16 +29,16 @@ Imagine that your components are cooks in the kitchen, assembling tasty dishes f
   <Illustration caption="Commit" alt="React delivers the Card to the user at their table." src="/images/docs/illustrations/i_render-and-commit3.png" />
 </IllustrationBlock>
 
-## Step 1: Trigger a render {/*step-1-trigger-a-render*/}
+## Passo 1: Avviare la renderizzazione {/*step-1-trigger-a-render*/}
 
-There are two reasons for a component to render:
+Ci sono due motivi per cui un componente deve eseguire la renderizzazione:
 
-1. It's the component's **initial render.**
-2. The component's (or one of its ancestors') **state has been updated.**
+1. E' la **renderizzazione iniziale** del componente.
+2. Lo **stato** del componente(o uno dei suoi antenati) **è stato aggiornato.**
 
-### Initial render {/*initial-render*/}
+### Renderizzazione iniziale {/*initial-render*/}
 
-When your app starts, you need to trigger the initial render. Frameworks and sandboxes sometimes hide this code, but it's done by calling [`createRoot`](/reference/react-dom/client/createRoot) with the target DOM node, and then calling its `render` method with your component:
+Quando l'applicazione viene avviata, è necessario avviare la renderizzazione iniziale. Le librerie e gli ambienti di sviluppo a volte nascondono questo codice, ma viene eseguita chiamando  [`createRoot`](/reference/react-dom/client/createRoot) con il nodo DOM di destinazione, e quindi chiamando il suo metodo `render` con il componente:
 
 <Sandpack>
 
@@ -55,7 +55,7 @@ export default function Image() {
   return (
     <img
       src="https://i.imgur.com/ZF6s192.jpg"
-      alt="'Floralis Genérica' by Eduardo Catalano: a gigantic metallic flower sculpture with reflective petals"
+      alt="'Floralis Genérica' di Eduardo Catalano: una gigantesca scultura floreale metallica con petali riflettenti."
     />
   );
 }
@@ -63,11 +63,11 @@ export default function Image() {
 
 </Sandpack>
 
-Try commenting out the `root.render()` call and see the component disappear!
+Prova a commentare la chiamata `root.render()` e vedrai il componente scomparire!
 
-### Re-renders when state updates {/*re-renders-when-state-updates*/}
+### Renderizzare nuovamente quando lo stato viene aggiornato{/*re-renders-when-state-updates*/}
 
-Once the component has been initially rendered, you can trigger further renders by updating its state with the [`set` function.](/reference/react/useState#setstate) Updating your component's state automatically queues a render. (You can imagine these as a restaurant guest ordering tea, dessert, and all sorts of things after putting in their first order, depending on the state of their thirst or hunger.)
+Una volta che il componente è inizialmente renderizzato, è possibile avviare ulteriori renderizzazioni aggiornando il suo stato con la funzione [`set` function.](/reference/react/useState#setstate) Aggiornare lo stato del componente mette automaticamente in coda una renderizzazione (puoi immaginarlo come un ospite del ristorante che ordina tè, dessert e ogni sorta di cosa dopo aver effettuato il primo ordine, a seconda della sua sete o fame)
 
 <IllustrationBlock sequential>
   <Illustration caption="State update..." alt="React as a server in a restaurant, serving a Card UI to the user, represented as a patron with a cursor for their head. They patron expresses they want a pink card, not a black one!" src="/images/docs/illustrations/i_rerender1.png" />
