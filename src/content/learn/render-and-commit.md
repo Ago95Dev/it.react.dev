@@ -140,20 +140,20 @@ Altrimenti, è possibile incontrare bug confusi e comportamenti imprevedibili ma
 
 <DeepDive>
 
-#### Optimizing performance {/*optimizing-performance*/}
+#### Ottimizzazione delle prestazioni{/*optimizing-performance*/}
 
-The default behavior of rendering all components nested within the updated component is not optimal for performance if the updated component is very high in the tree. If you run into a performance issue, there are several opt-in ways to solve it described in the [Performance](https://reactjs.org/docs/optimizing-performance.html) section. **Don't optimize prematurely!**
+Il comportamento predefinito di renderizzare tutti i componenti annidati all'interno del componente aggiornato non è ottimale in termini di prestazioni se il componente aggiornato è molto in alto nell'albero. Se si riscontra un problema di prestazioni, esistono diverse soluzioni favorite descritte nella sezione [Prestazioni](https://reactjs.org/docs/optimizing-performance.html). **Non ottimizzare prematuramente!**
 
 </DeepDive>
 
-## Step 3: React commits changes to the DOM {/*step-3-react-commits-changes-to-the-dom*/}
+## Step 3: React modifica il DOM  {/*step-3-react-commits-changes-to-the-dom*/}
 
-After rendering (calling) your components, React will modify the DOM. 
+Dopo aver renderizzato (chiamato) i componenti, React modificherà il DOM.
 
-* **For the initial render,** React will use the [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) DOM API to put all the DOM nodes it has created on screen. 
-* **For re-renders,** React will apply the minimal necessary operations (calculated while rendering!) to make the DOM match the latest rendering output.
+* **Per la renderizzazione iniziale,** React utilizzerà l'API DOM [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) per inserire tutti i nodi DOM creati sullo schermo.
+* **Per ri-renderizzare,** React applicherà solo le operazioni minime necessarie (calcolate durante il rendering!)per rendere il DOM uguale all'ultimo output di rendering.
 
-**React only changes the DOM nodes if there's a difference between renders.** For example, here is a component that re-renders with different props passed from its parent every second. Notice how you can add some text into the `<input>`, updating its `value`, but the text doesn't disappear when the component re-renders:
+**React cambia solo i nodi DOM se c'è una differenza tra le renderizzazioni.** Ad esempio, ecco un componente che si ri-renderizza con diverse props passate dal suo genitore ogni secondo. Notare come è possibile aggiungere del testo nell' `<input>`, updating its `value`, , ma il testo non scompare quando il componente si ri-renderizza:
 
 <Sandpack>
 
