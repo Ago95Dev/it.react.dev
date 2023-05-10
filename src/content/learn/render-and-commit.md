@@ -151,7 +151,7 @@ Il comportamento predefinito di renderizzare tutti i componenti annidati all'int
 Dopo aver renderizzato (chiamato) i componenti, React modificherà il DOM.
 
 * **Per la renderizzazione iniziale,** React utilizzerà l'API DOM [`appendChild()`](https://developer.mozilla.org/docs/Web/API/Node/appendChild) per inserire tutti i nodi DOM creati sullo schermo.
-* **Per ri-renderizzare,** React applicherà solo le operazioni minime necessarie (calcolate durante il rendering!)per rendere il DOM uguale all'ultimo output di rendering.
+* **Per ri-renderizzare,** React applicherà solo le operazioni minime necessarie (calcolate durante il rendering!) per rendere il DOM uguale all'ultimo output di rendering.
 
 **React cambia solo i nodi DOM se c'è una differenza tra le renderizzazioni.** Ad esempio, ecco un componente che si ri-renderizza con diverse props passate dal suo genitore ogni secondo. Notare come è possibile aggiungere del testo nell' `<input>`, updating its `value`, , ma il testo non scompare quando il componente si ri-renderizza:
 
@@ -193,21 +193,21 @@ export default function App() {
 
 </Sandpack>
 
-This works because during this last step, React only updates the content of `<h1>` with the new `time`. It sees that the `<input>` appears in the JSX in the same place as last time, so React doesn't touch the `<input>`—or its `value`!
-## Epilogue: Browser paint {/*epilogue-browser-paint*/}
+Questo funziona perché durante l'ultimo passaggio, React aggiorna solo il contenuto di `<h1>` con il nuovo `time`. Vede che l' `<input>` appare nel JSX nello stesso punto come l'ultima volta, quindi React non tocca `<input>`— o il suo `value`!
+## Epilogo: Dipingere il browser {/*epilogue-browser-paint*/}
 
-After rendering is done and React updated the DOM, the browser will repaint the screen. Although this process is known as "browser rendering", we'll refer to it as "painting" to avoid confusion throughout the docs.
+Dopo che la renderizzazione viene eseguita e React ha aggiornato il DOM, il browser dipinge la schermata. Sebbene questo processo sia noto come "renderizzazione del browser", lo chiameremo "dipingere" per evitare confusione in tutta la documentazione.
 
-<Illustration alt="A browser painting 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
+<Illustration alt="Un browser che dipinge l'immagine 'still life with card element'." src="/images/docs/illustrations/i_browser-paint.png" />
 
 <Recap>
 
-* Any screen update in a React app happens in three steps:
+* Ogni aggiornamento dello schermo in un'app React avviene in tre fasi:
   1. Trigger
-  2. Render
+  2. Renderizzazione
   3. Commit
-* You can use Strict Mode to find mistakes in your components
-* React does not touch the DOM if the rendering result is the same as last time
+* Puoi usare la Modalità Strict per trovare gli errori nei tuoi componenti
+* React non modifica il DOM se il risultato della renderizzazione è lo stesso della volta precedente
 
 </Recap>
 
