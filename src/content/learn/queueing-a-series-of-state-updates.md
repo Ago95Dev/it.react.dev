@@ -1,23 +1,23 @@
 ---
-title: Queueing a Series of State Updates
+title: Accodare una Serie di Aggiornamenti di Stato
 ---
 
 <Intro>
 
-Setting a state variable will queue another render. But sometimes you might want to perform multiple operations on the value before queueing the next render. To do this, it helps to understand how React batches state updates.
+Impostando una variabile di stato si accoda un ulteriore render. Tuttavia, a volte si potrebbe desiderare eseguire più operazioni sul valore prima di accodare il prossimo render. Per farlo, è utile comprendere come React raggruppa gli aggiornamenti di stato.
 
 </Intro>
 
 <YouWillLearn>
 
-* What "batching" is and how React uses it to process multiple state updates
-* How to apply several updates to the same state variable in a row
+* Cos'è il "raggruppamento" (batching) e come React lo utilizza per elaborare più aggiornamenti di stato contemporaneamente
+* Come applicare diversi aggiornamenti alla stessa variabile di stato in successione
 
 </YouWillLearn>
 
-## React batches state updates {/*react-batches-state-updates*/}
+## React raggruppa gli aggiornamenti di stato {/*react-batches-state-updates*/}
 
-You might expect that clicking the "+3" button will increment the counter three times because it calls `setNumber(number + 1)` three times:
+Potresti aspettarti che cliccando il bottone '+3' il contatore viene aumentato tre volte perché chiama setNumber(number + 1) tre volte:
 
 <Sandpack>
 
@@ -47,7 +47,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-However, as you might recall from the previous section, [each render's state values are fixed](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), so the value of `number` inside the first render's event handler is always `0`, no matter how many times you call `setNumber(1)`:
+Tuttavia, come potresti ricordare dalla sezione precedente, [i valori di stato dei render sono fissi](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), quindi il valore di `number` all'interno del gestore di eventi del primo render è sempre `0`, indipendentemente da quante volte chiami `setNumber(1)`:
 
 ```js
 setNumber(0 + 1);
