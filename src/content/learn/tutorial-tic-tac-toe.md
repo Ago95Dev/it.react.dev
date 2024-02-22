@@ -29,7 +29,7 @@ Puoi vedere come sarà quando avrai finito qui:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -147,7 +147,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -206,13 +206,13 @@ Nel live editor di codice di seguito, fai click su **Fork** nell'angolo in alto 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 export default function Square() {
   return <button className="square">X</button>;
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -264,7 +264,7 @@ body {
 Puoi anche seguire questo tutorial usando il tuo ambiente di sviluppo locale. Per fare ciò, è necessario:
 
 1. Installa [Node.js](https://nodejs.org/it)
-1. Nella scheda CodeSandbox che hai aperto prima, premi il pulsante nell'angolo in alto a sinistra per aprire il menu, quindi scegli **File > Export to Zip** in quel menu per scaricare un archivio dei file in locale
+1. Nella scheda CodeSandbox che hai aperto prima, premi il pulsante nell'angolo in alto a sinistra per aprire il menu, quindi scegli **Download Sandbox** in quel menu per scaricare un archivio dei file in locale
 1. Decomprimi l'archivio, quindi apri un terminale e `cd` nella cartella che hai decompresso.
 1. Installa le dipendenze con `npm install`
 1. Esegui `npm start` per avviare un server locale e segui le istruzioni per visualizzare il codice in esecuzione in un browser
@@ -362,11 +362,11 @@ Otterrai questo errore:
 
 <ConsoleBlock level="error">
 
-/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment `<>...</>`?
+/src/App.js: Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX Fragment `<>...</>`?
 
 </ConsoleBlock>
 
-I componenti React devono restituire un singolo elemento JSX e non multipli elementi JSX adiacenti come due pulsanti. Per risolvere questo problema puoi usare i *fragments* (`<>` e `</>`) per avvolgere più elementi JSX adiacenti in questo modo:
+I componenti React devono restituire un singolo elemento JSX e non multipli elementi JSX adiacenti come due pulsanti. Per risolvere questo problema puoi usare i *Fragments* (`<>` e `</>`) per avvolgere più elementi JSX adiacenti in questo modo:
 
 ```js {3-6}
 export default function Square() {
@@ -455,7 +455,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -627,7 +627,7 @@ Il tuo codice aggiornato dovrebbe assomigliare a questo:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 function Square({ value }) {
   return <button className="square">{value}</button>;
 }
@@ -655,7 +655,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -807,7 +807,7 @@ Dopo aver apportato le modifiche di cui sopra, il tuo codice sarà simile al seg
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square() {
@@ -850,7 +850,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -988,7 +988,7 @@ E il tuo codice dovrebbe somigliare a questo:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value }) {
@@ -1019,7 +1019,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1228,7 +1228,7 @@ Ecco come dovrebbe apparire il tuo codice:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1270,7 +1270,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1422,7 +1422,7 @@ Ora puoi solo aggiungere `X` o `O` ai quadrati vuoti! Ecco come dovrebbe apparir
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1473,7 +1473,7 @@ export default function Board() {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1524,7 +1524,7 @@ body {
 
 Ora che i giocatori possono fare a turno, vorrai mostrare quando la partita è vinta e non ci sono più turni da eseguire. Per fare ciò aggiungerai una funzione di supporto chiamata `calculateWinner` che prende un array di 9 quadrati, verifica la presenza di un vincitore e restituisce `'X'`, `'O'` o `null` a seconda dei casi. Non preoccuparti troppo della funzione `calculateWinner`; non è specifica di React:
 
-```js App.js
+```js src/App.js
 export default function Board() {
   //...
 }
@@ -1594,7 +1594,7 @@ Congratulazioni! Ora hai un gioco di tic-tac-toe funzionante. E hai appena impar
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -1674,7 +1674,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -1872,7 +1872,7 @@ A questo punto, hai spostato lo state in modo che risieda nel componente `Game` 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -1970,7 +1970,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2083,7 +2083,7 @@ Risolverai questo errore nella prossima sezione.
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2199,7 +2199,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2311,7 +2311,7 @@ const moves = history.map((squares, move) => {
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2428,7 +2428,7 @@ function calculateWinner(squares) {
 
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2532,7 +2532,7 @@ Se fai click su un passaggio qualsiasi nella cronologia del gioco, il tabellone 
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({value, onSquareClick}) {
@@ -2652,7 +2652,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
@@ -2742,7 +2742,7 @@ Guarda qui il risultato finale:
 
 <Sandpack>
 
-```js App.js
+```js src/App.js
 import { useState } from 'react';
 
 function Square({ value, onSquareClick }) {
@@ -2860,7 +2860,7 @@ function calculateWinner(squares) {
 }
 ```
 
-```css styles.css
+```css src/styles.css
 * {
   box-sizing: border-box;
 }
