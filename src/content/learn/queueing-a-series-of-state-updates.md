@@ -99,10 +99,10 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here, `n => n + 1` is called an **updater function.** When you pass it to a state setter:
+Qui, `n => n + 1` viene chiamata una **updater function.** Quando la passi ad uno state setter:
 
-1. React queues this function to be processed after all the other code in the event handler has run.
-2. During the next render, React goes through the queue and gives you the final updated state.
+1. React mette in coda questa funzione per essere elaborata dopo che tutto il resto del codice nel event handler è stato eseguito.
+2. Durante il successivo render, React passa in rassegna la coda e ti fornisce lo stato aggiornato finale.
 
 ```js
 setNumber(n => n + 1);
@@ -110,26 +110,26 @@ setNumber(n => n + 1);
 setNumber(n => n + 1);
 ```
 
-Here's how React works through these lines of code while executing the event handler:
+Ecco come React elabora queste righe di codice durante l'esecuzione del event handler:
 
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
-1. `setNumber(n => n + 1)`: `n => n + 1` is a function. React adds it to a queue.
+1. `setNumber(n => n + 1)`: `n => n + 1` è una funzione. React la aggiunge a una coda.
+1. `setNumber(n => n + 1)`: `n => n + 1` è una funzione. React la aggiunge a una coda.
+1. `setNumber(n => n + 1)`: `n => n + 1` è una funzione. React la aggiunge a una coda.
 
-When you call `useState` during the next render, React goes through the queue. The previous `number` state was `0`, so that's what React passes to the first updater function as the `n` argument. Then React takes the return value of your previous updater function and passes it to the next updater as `n`, and so on:
+Quando chiami useState durante il successivo render, React scansiona la coda.  Il precedente `numero` di stato era `0`, quindi è quello che React passa alla prima funzione di aggiornamento come argomento `n`. In seguito React  prende il valore restituito dalla precedente funzione di aggiornamento e lo passa alla successiva come parametro `n`, e cosi via:
 
-|  queued update | `n` | returns |
+|  queued update | `n` | ritorna |
 |--------------|---------|-----|
 | `n => n + 1` | `0` | `0 + 1 = 1` |
 | `n => n + 1` | `1` | `1 + 1 = 2` |
 | `n => n + 1` | `2` | `2 + 1 = 3` |
 
-React stores `3` as the final result and returns it from `useState`.
+React memorizza 3 come risultato finale e lo restituisce dallo `useState`.
 
-This is why clicking "+3" in the above example correctly increments the value by 3.
-### What happens if you update state after replacing it {/*what-happens-if-you-update-state-after-replacing-it*/}
+Ecco perché cliccare "+3" nell'esempio sopra incrementa correttamente il valore di 3.
+### Cosa succede se aggiorni lo stato dopo averlo sostituito {/*what-happens-if-you-update-state-after-replacing-it*/}
 
-What about this event handler? What do you think `number` will be in the next render?
+Cosa possiamo dire riguardo questo event handler? Che valore ha `number` al prossimo render?
 
 ```js
 <button onClick={() => {
@@ -165,29 +165,29 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here's what this event handler tells React to do:
+Ecco cosa l'event handler dice di elaborare a React:
 
-1. `setNumber(number + 5)`: `number` is `0`, so `setNumber(0 + 5)`. React adds *"replace with `5`"* to its queue.
-2. `setNumber(n => n + 1)`: `n => n + 1` is an updater function. React adds *that function* to its queue.
+1. `setNumber(number + 5)`: `number` is `0`, quindi  `setNumber(0 + 5)`. React aggiunge *"sostituisci con 5"* alla sua coda.
+2. `setNumber(n => n + 1)`: `n => n + 1` è una funzione di aggiornamento. React aggiunge *quella funzione* alla sua coda.
 
-During the next render, React goes through the state queue:
+Durante il prossimo render, React va attraverso la state queue:
 
-|   queued update       | `n` | returns |
+|   queued update       | `n` | ritorna |
 |--------------|---------|-----|
 | "replace with `5`" | `0` (unused) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 
-React stores `6` as the final result and returns it from `useState`. 
+React memorizza `6` come risultato finale e lo restituisce da `useState`. 
 
 <Note>
 
-You may have noticed that `setState(5)` actually works like `setState(n => 5)`, but `n` is unused!
+Potresti aver notato che `setState(5)` in realtà funziona come `setState(n => 5)`, ma `n` non viene utilizzato!
 
 </Note>
 
-### What happens if you replace state after updating it {/*what-happens-if-you-replace-state-after-updating-it*/}
+### osa succede se sostituisci lo stato dopo averlo aggiornato{/*what-happens-if-you-replace-state-after-updating-it*/}
 
-Let's try one more example. What do you think `number` will be in the next render?
+Proviamo un altro esempio. Che valore pensi `number` ha nel prossimo render?
 
 ```js
 <button onClick={() => {
@@ -225,21 +225,21 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-Here's how React works through these lines of code while executing this event handler:
+Ecco come React elabora queste righe di codice durante l'esecuzione di questo event handler:
 
-1. `setNumber(number + 5)`: `number` is `0`, so `setNumber(0 + 5)`. React adds *"replace with `5`"* to its queue.
-2. `setNumber(n => n + 1)`: `n => n + 1` is an updater function. React adds *that function* to its queue.
-3. `setNumber(42)`: React adds *"replace with `42`"* to its queue.
+1. `setNumber(number + 5)`: `number` e `0`, quindi `setNumber(0 + 5)`. React aggiunge *"sostituisci con `5`"* nella sua coda.
+2. `setNumber(n => n + 1)`: `n => n + 1` è una funzione di aggiornamento. React aggiunge *quella funzione* alla sua coda.
+3. `setNumber(42)`: React aggiunge *"rimpiazza con `42`"* alla sua coda.
 
-During the next render, React goes through the state queue:
+Durante il prossimo render, React attraversa la coda degli stati:
 
-|   queued update       | `n` | returns |
+|   queued update       | `n` | ritorna |
 |--------------|---------|-----|
 | "replace with `5`" | `0` (unused) | `5` |
 | `n => n + 1` | `5` | `5 + 1 = 6` |
 | "replace with `42`" | `6` (unused) | `42` |
 
-Then React stores `42` as the final result and returns it from `useState`.
+Then React deposita`42` come risultato finale e lo ritorna da `useState`.
 
 To summarize, here's how you can think of what you're passing to the `setNumber` state setter:
 
