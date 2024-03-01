@@ -1,23 +1,23 @@
 ---
-title: Queueing a Series of State Updates
+title: Accodare una Serie di Aggiornamenti di Stato
 ---
 
 <Intro>
 
-Setting a state variable will queue another render. But sometimes you might want to perform multiple operations on the value before queueing the next render. To do this, it helps to understand how React batches state updates.
+Impostando una variabile di stato si accoda un ulteriore render. Tuttavia, a volte si potrebbe desiderare eseguire più operazioni sul valore prima di accodare il prossimo render. Per farlo, è utile comprendere come React raggruppa gli aggiornamenti di stato.
 
 </Intro>
 
 <YouWillLearn>
 
-* What "batching" is and how React uses it to process multiple state updates
-* How to apply several updates to the same state variable in a row
+* Cos'è il "raggruppamento" (batching) e come React lo utilizza per elaborare più aggiornamenti di stato contemporaneamente
+* Come applicare diversi aggiornamenti alla stessa variabile di stato in successione
 
 </YouWillLearn>
 
-## React batches state updates {/*react-batches-state-updates*/}
+## React raggruppa gli aggiornamenti di stato {/*react-batches-state-updates*/}
 
-You might expect that clicking the "+3" button will increment the counter three times because it calls `setNumber(number + 1)` three times:
+Potresti aspettarti che cliccando il bottone '+3' il contatore viene aumentato tre volte perché chiama setNumber(number + 1) tre volte:
 
 <Sandpack>
 
@@ -47,7 +47,7 @@ h1 { display: inline-block; margin: 10px; width: 30px; text-align: center; }
 
 </Sandpack>
 
-However, as you might recall from the previous section, [each render's state values are fixed](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), so the value of `number` inside the first render's event handler is always `0`, no matter how many times you call `setNumber(1)`:
+Tuttavia, come potresti ricordare dalla sezione precedente, [i valori di stato dei render sono fissi](/learn/state-as-a-snapshot#rendering-takes-a-snapshot-in-time), quindi il valore di `number` all'interno del gestore di eventi del primo render è sempre `0`, indipendentemente da quante volte chiami `setNumber(1)`:
 
 ```js
 setNumber(0 + 1);
@@ -55,21 +55,21 @@ setNumber(0 + 1);
 setNumber(0 + 1);
 ```
 
-But there is one other factor at play here. **React waits until *all* code in the event handlers has run before processing your state updates.** This is why the re-render only happens *after* all these `setNumber()` calls.
+Ma c'è un altro fattore che gioca un ruolo qui. **React attende fino a quando *tutto* il codice negli handler degli eventi è stato eseguito prima di elaborare gli aggiornamenti di stato.** È per questo che il re-render avviene solo  *dopo* tutte queste chiamate a `setNumber()`.
 
-This might remind you of a waiter taking an order at the restaurant. A waiter doesn't run to the kitchen at the mention of your first dish! Instead, they let you finish your order, let you make changes to it, and even take orders from other people at the table.
+Questo potrebbe ricordarti un cameriere che prende un ordine al ristorante. Un cameriere non corre in cucina quando menzioni il primo piatto! Invece, ti lascia finire il tuo ordine, permettono di apportare modifiche e prendono anche ordini da altre persone al tavolo.
 
-<Illustration src="/images/docs/illustrations/i_react-batching.png"  alt="An elegant cursor at a restaurant places and order multiple times with React, playing the part of the waiter. After she calls setState() multiple times, the waiter writes down the last one she requested as her final order." />
+<Illustration src="/images/docs/illustrations/i_react-batching.png"  alt="Un elegante cursore in un ristorante effettua un ordine più volte con React, interpretando il ruolo del cameriere. Dopo che chiama setState() più volte, il cameriere annota l'ultimo ordine richiesto come il suo ordine finale." />
 
-This lets you update multiple state variables--even from multiple components--without triggering too many [re-renders.](/learn/render-and-commit#re-renders-when-state-updates) But this also means that the UI won't be updated until _after_ your event handler, and any code in it, completes. This behavior, also known as **batching,** makes your React app run much faster. It also avoids dealing with confusing "half-finished" renders where only some of the variables have been updated.
+Questo ti consente di aggiornare multiple variabili di state--anche da più componenti--senza attivare troppi [re-renders.](/learn/render-and-commit#re-renders-when-state-updates) Ma ciò significa anche che l'UI non viene aggiornata fino a _dopo che_ l'event handler, e qualsiasi codice al suo interno, terminano. Questo comportamento, noto anche come **batching,** rende l'esecuzione della tua React app molto più veloce. Evita anche di dover gestire renders confusionari "eseguiti a metà" dove solo alcune delle variabili sono state aggiornate.
 
-**React does not batch across *multiple* intentional events like clicks**--each click is handled separately. Rest assured that React only does batching when it's generally safe to do. This ensures that, for example, if the first button click disables a form, the second click would not submit it again.
+**React non raggruppa gli eventi *multipli* intenzionali come i click**--ogni click viene gestito separatamente. Stai tranquillo che React di solito raggruppa solo quando è sicuro farlo. Questo assicura che, per esempio, che se il primo clic del pulsante disabilita un form, il secondo click non lo invierà di nuovo.
 
-## Updating the same state multiple times before the next render {/*updating-the-same-state-multiple-times-before-the-next-render*/}
+## Aggiornamento dello stesso stato più volte prima del successivo render {/*updating-the-same-state-multiple-times-before-the-next-render*/}
 
-It is an uncommon use case, but if you would like to update the same state variable multiple times before the next render, instead of passing the *next state value* like `setNumber(number + 1)`, you can pass a *function* that calculates the next state based on the previous one in the queue, like `setNumber(n => n + 1)`. It is a way to tell React to "do something with the state value" instead of just replacing it.
+Si tratta di uno use case non comune, but if you would like to update the same state variable multiple times before the next render, instead of passing the *next state value* like `setNumber(number + 1)`, you can pass a *function* that calculates the next state based on the previous one in the queue, like `setNumber(n => n + 1)`. It is a way to tell React to "do something with the state value" instead of just replacing it.
 
-Try incrementing the counter now:
+Prova ad incrementare il contatore adesso:
 
 <Sandpack>
 
