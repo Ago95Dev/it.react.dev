@@ -241,16 +241,16 @@ Durante il prossimo render, React attraversa la coda degli stati:
 
 Then React deposita`42` come risultato finale e lo ritorna da `useState`.
 
-To summarize, here's how you can think of what you're passing to the `setNumber` state setter:
+Per riassumere, ecco come puoi pensare a ciò che stai passando al setter di state `setNumber`:
 
-* **An updater function** (e.g. `n => n + 1`) gets added to the queue.
-* **Any other value** (e.g. number `5`) adds "replace with `5`" to the queue, ignoring what's already queued.
+* **Una funzione di aggiornamento** (ad esempio `n => n + 1`) viene aggiunta alla coda.
+* **Qualsiasi altro valore** (ad esempio il numero `5`) aggiunge "sostituisci con 5" alla coda, ignorando ciò che è già in coda.
 
-After the event handler completes, React will trigger a re-render. During the re-render, React will process the queue. Updater functions run during rendering, so **updater functions must be [pure](/learn/keeping-components-pure)** and only *return* the result. Don't try to set state from inside of them or run other side effects. In Strict Mode, React will run each updater function twice (but discard the second result) to help you find mistakes.
+Dopo il completamento dell'handler evento, React attiverà un nuovo rendering. Durante il rendering, React elaborerà la coda. Le funzioni dell'updater vengono eseguite durante il rendering, quindi **le funzioni di aggiornamento devono essere [pure](/learn/keeping-components-pure)** e devono restituire solo il risultato. Non provare a impostare lo state da all'interno di esse o eseguire altri side effects. In Strict Mode, React eseguirà ciascuna funzione dell'updater due volte (ma scarterà il secondo risultato)  per aiutarti a individuare errori.
 
-### Naming conventions {/*naming-conventions*/}
+### Convenzioni di denominazione {/*naming-conventions*/}
 
-It's common to name the updater function argument by the first letters of the corresponding state variable:
+È comune nominare l'argomento della funzione updater con le prime lettere della variabile di stato corrispondente:
 
 ```js
 setEnabled(e => !e);
