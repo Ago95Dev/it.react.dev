@@ -258,13 +258,13 @@ setLastName(ln => ln.reverse());
 setFriendCount(fc => fc * 2);
 ```
 
-If you prefer more verbose code, another common convention is to repeat the full state variable name, like `setEnabled(enabled => !enabled)`, or to use a prefix like `setEnabled(prevEnabled => !prevEnabled)`.
+Se preferisci un codice più dettagliato, un'altra convenzione comune è ripetere il nome completo della variabile di stato, come `setEnabled(enabled => !enabled)`, oppure utilizzare un prefisso come  `setEnabled(prevEnabled => !prevEnabled)`.
 
 <Recap>
 
-* Setting state does not change the variable in the existing render, but it requests a new render.
-* React processes state updates after event handlers have finished running. This is called batching.
-* To update some state multiple times in one event, you can use `setNumber(n => n + 1)` updater function.
+* Impostare lo stato non cambia la variabile nel rendering attuale, ma richiede un nuovo rendering.
+* React elabora gli aggiornamenti dello stato dopo che gli handler degli eventi hanno terminato l'esecuzione. Questo è chiamato batching
+* Per aggiornare lo stato più volte in un solo evento, puoi utilizzare la funzione di aggiornamento `setNumber(n => n + 1)`.
 
 </Recap>
 
@@ -274,9 +274,9 @@ If you prefer more verbose code, another common convention is to repeat the full
 
 #### Fix a request counter {/*fix-a-request-counter*/}
 
-You're working on an art marketplace app that lets the user submit multiple orders for an art item at the same time. Each time the user presses the "Buy" button, the "Pending" counter should increase by one. After three seconds, the "Pending" counter should decrease, and the "Completed" counter should increase.
+Stai lavorando a un'app di mercato d'arte che consente all'utente di inviare più ordini per un articolo d'arte allo stesso tempo. Ogni volta che l'utente preme il pulsante "Acquista", il contatore "In sospeso" dovrebbe aumentare di uno. Dopo tre secondi, il contatore "In sospeso" dovrebbe diminuire e il contatore "Completato" dovrebbe aumentare.
 
-However, the "Pending" counter does not behave as intended. When you press "Buy", it decreases to `-1` (which should not be possible!). And if you click fast twice, both counters seem to behave unpredictably.
+Tuttavia, il contatore "In sospeso" non si comporta come previsto. Quando premi "Acquista", diminuisce a `-1` (non dovrebbe essere possibile!). E se clicchi rapidamente due volte, entrambi i contatori sembrano comportarsi in modo imprevedibile.
 
 Why does this happen? Fix both counters.
 
