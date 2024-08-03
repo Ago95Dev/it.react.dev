@@ -272,13 +272,13 @@ Se preferisci un codice più dettagliato, un'altra convenzione comune è ripeter
 
 <Challenges>
 
-#### Fix a request counter {/*fix-a-request-counter*/}
+#### Correggi il counter delle richieste {/*fix-a-request-counter*/}
 
 Stai lavorando a un'app di mercato d'arte che consente all'utente di inviare più ordini per un articolo d'arte allo stesso tempo. Ogni volta che l'utente preme il pulsante "Acquista", il contatore "In sospeso" dovrebbe aumentare di uno. Dopo tre secondi, il contatore "In sospeso" dovrebbe diminuire e il contatore "Completato" dovrebbe aumentare.
 
 Tuttavia, il contatore "In sospeso" non si comporta come previsto. Quando premi "Acquista", diminuisce a `-1` (non dovrebbe essere possibile!). E se clicchi rapidamente due volte, entrambi i contatori sembrano comportarsi in modo imprevedibile.
 
-Why does this happen? Fix both counters.
+Perché succede questo? Correggi entrambi i contatori.
 
 <Sandpack>
 
@@ -322,7 +322,7 @@ function delay(ms) {
 
 <Solution>
 
-Inside the `handleClick` event handler, the values of `pending` and `completed` correspond to what they were at the time of the click event. For the first render, `pending` was `0`, so `setPending(pending - 1)` becomes `setPending(-1)`, which is wrong. Since you want to *increment* or *decrement* the counters, rather than set them to a concrete value determined during the click, you can instead pass the updater functions:
+All'interno dell'event handler `handleClick`, i valori di `pending` e  `completed` corrispondono a quelli che erano in quel momento nel click event. Per il primo render, `pending` era `0`, quindi `setPending(pending - 1)` diventa `setPending(-1)`, il che è sbagliato. Poiché desideri *incrementare* o *decrementare* i contatori, piuttosto che impostarli su un valore concreto determinato durante il click, puoi invece passare delle updater function:
 
 <Sandpack>
 
@@ -364,7 +364,7 @@ function delay(ms) {
 
 </Sandpack>
 
-This ensures that when you increment or decrement a counter, you do it in relation to its *latest* state rather than what the state was at the time of the click.
+Questo garantisce che quando incrementi o decrementi un contatore, lo fai in relazione al suo *ultimo* state piuttosto che a quello attivo al momento del click.
 
 </Solution>
 
